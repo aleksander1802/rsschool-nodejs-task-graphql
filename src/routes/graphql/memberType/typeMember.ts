@@ -9,11 +9,7 @@ import {
 import { Context } from '../types/context.js';
 import { ProfileType } from '../profile/typeProfile.js';
 import { MemberType as PrismaMemberType } from '@prisma/client';
-
-enum MemberTypeId {
-  BASIC = 'basic',
-  BUSINESS = 'business',
-}
+import { MemberTypeId } from '../../member-types/schemas.js';
 
 export const MemberTypeIdEnum = new GraphQLEnumType({
   name: 'MemberTypeId',
@@ -34,8 +30,8 @@ export const MemberType = new GraphQLObjectType({
       type: new GraphQLList(ProfileType),
       resolve: async (source: PrismaMemberType, __: unknown, { prisma }: Context) => {
         const { id } = source;
-        const member = await prisma.profile.findMany({ where: { memberTypeId: id } });
-        return member;
+        const profile = await prisma.profile.findMany({ where: { memberTypeId: id } });
+        return profile;
       },
     },
   }),

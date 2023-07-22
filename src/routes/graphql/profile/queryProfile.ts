@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull } from 'graphql';
+import { GraphQLList, GraphQLObjectType } from 'graphql';
 import { UUIDType } from '../types/uuid.js';
 import { Context } from '../types/context.js';
 import { ProfileType } from './typeProfile.js';
@@ -6,9 +6,9 @@ import { Profile } from '@prisma/client';
 
 export const ProfileQueries = {
   profile: {
-    type: new GraphQLNonNull(ProfileType) ,
+    type: ProfileType as GraphQLObjectType,
     args: {
-      id: { type: new GraphQLNonNull(UUIDType) },
+      id: { type: UUIDType },
     },
     resolve: async (_: unknown, { id }: Profile, { prisma }: Context) => {
       const profile = await prisma.profile.findUnique({ where: { id } });

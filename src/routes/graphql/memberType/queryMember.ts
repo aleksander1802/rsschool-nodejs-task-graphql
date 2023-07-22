@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull } from 'graphql';
+import { GraphQLList, GraphQLObjectType } from 'graphql';
 import { Context } from '../types/context.js';
 import { MemberTypeIdEnum } from './typeMember.js';
 import { MemberType as PrismaMemberType } from '@prisma/client';
@@ -6,9 +6,9 @@ import { MemberType } from './typeMember.js';
 
 export const MemberTypeQueries = {
   memberType: {
-    type: new GraphQLNonNull(MemberType),
+    type: MemberType as GraphQLObjectType,
     args: {
-      id: { type: new GraphQLNonNull(MemberTypeIdEnum) },
+      id: { type: MemberTypeIdEnum },
     },
     resolve: async (__: unknown, args: PrismaMemberType, { prisma }: Context) => {
       const { id } = args;
