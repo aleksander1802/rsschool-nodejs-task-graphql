@@ -42,8 +42,8 @@ export const UserMutations = {
   subscribeTo: {
     type: UserType as GraphQLObjectType,
     args: {
-      userId: { type: UUIDType },
-      authorId: { type: UUIDType },
+      userId: { type: new GraphQLNonNull(UUIDType) },
+      authorId: { type: new GraphQLNonNull(UUIDType) },
     },
     resolve: async (
       __: unknown,
@@ -60,8 +60,8 @@ export const UserMutations = {
   unsubscribeFrom: {
     type: UUIDType,
     args: {
-      userId: { type: UUIDType },
-      authorId: { type: UUIDType },
+      userId: { type: new GraphQLNonNull(UUIDType) },
+      authorId: { type: new GraphQLNonNull(UUIDType) },
     },
     resolve: async (
       __: unknown,
