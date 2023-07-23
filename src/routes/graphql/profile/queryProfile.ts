@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLObjectType } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLObjectType } from 'graphql';
 import { UUIDType } from '../types/uuid.js';
 import { Context } from '../types/context.js';
 import { ProfileType } from './typeProfile.js';
@@ -8,19 +8,15 @@ export const ProfileQueries = {
   profile: {
     type: ProfileType as GraphQLObjectType,
     args: {
-      id: { type: UUIDType },
+      id: { type: new GraphQLNonNull(UUIDType) },
     },
-    resolve: async (_: unknown, { id }: Profile, { prisma }: Context) => {
-      const profile = await prisma.profile.findUnique({ where: { id } });
-      return profile;
-    },
+    resolve: async (_: unknown, { id }: Profile, { prisma }: Context) =>
+      await prisma.profile.findUnique({ where: { id } }),
   },
 
   profiles: {
     type: new GraphQLList(ProfileType),
-    resolve: async (_: unknown, __: unknown, { prisma }: Context) => {
-      const profiles = await prisma.profile.findMany();
-      return profiles;
-    },
+    resolve: async (_: unknown, __: unknown, { prisma }: Context) =>
+      await prisma.profile.findMany(),
   },
 };
