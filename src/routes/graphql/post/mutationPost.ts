@@ -3,12 +3,8 @@ import { Context } from '../types/context.js';
 import { UUIDType } from '../types/uuid.js';
 import { GraphQLNonNull } from 'graphql';
 import { PostType } from './typePost.js';
-import {
-  ChangePostInput,
-  ChangePostInputType,
-  CreatePostInput,
-  CreatePostInputType,
-} from './inputPost.js';
+import { ChangePostInput, CreatePostInput } from './inputPost.js';
+import { ChangePostInputType, CreatePostInputType } from '../types/input.js';
 
 export const PostMutations = {
   createPost: {

@@ -3,12 +3,8 @@ import { Context } from '../types/context.js';
 import { UUIDType } from '../types/uuid.js';
 import { GraphQLNonNull, GraphQLObjectType } from 'graphql';
 import { ProfileType } from './typeProfile.js';
-import {
-  ChangeProfileInput,
-  ChangeProfileInputType,
-  CreateProfileInput,
-  CreateProfileInputType,
-} from './inputProfile.js';
+import { ChangeProfileInput, CreateProfileInput } from './inputProfile.js';
+import { ChangeProfileInputType, CreateProfileInputType } from '../types/input.js';
 
 export const ProfileMutations = {
   createProfile: {
@@ -22,7 +18,7 @@ export const ProfileMutations = {
     type: ProfileType as GraphQLObjectType,
     args: {
       id: { type: new GraphQLNonNull(UUIDType) },
-      dto: { type: new GraphQLNonNull(ChangeProfileInput) },
+      dto: { type: ChangeProfileInput },
     },
     resolve: async (
       __: unknown,
