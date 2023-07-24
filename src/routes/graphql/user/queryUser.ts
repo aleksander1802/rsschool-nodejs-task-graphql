@@ -44,7 +44,7 @@ export const UserQueries = {
       const includeFields = ['userSubscribedTo', 'subscribedToUser'];
 
       for (const field of includeFields) {
-        include[field] = fields[field] !== null;
+        include[field] = fields[field] !== undefined;
       }
 
       const users = await prisma.user.findMany({ include });
